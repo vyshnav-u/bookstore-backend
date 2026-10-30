@@ -25,13 +25,19 @@ server.use(routes)
 
 const PORT = process.env.PORT
 
-
+// handling static file/folder
+server.use('/uploads',express.static('./uploads'))
 
 // start server
 
 server.listen(PORT,()=>{
     console.log("Server started");
     
+})
+// handling global errors using application specific malware
+
+server.use((err,req,res,next)=>{
+    res.status(500).json(err.message)
 })
 
 // resolve api in server
